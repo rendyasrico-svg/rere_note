@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Rere Note</title>
+
+
+    <!-- =========================
+         FAVICON
+    ========================== -->
+
+    <link
+        rel="icon"
+        type="image/jpeg"
+        href="logo.jpg"
+    >
+
+
+    <!-- =========================
+         PWA
+    ========================== -->
+
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
+
+    <meta
+        name="theme-color"
+        content="#800020"
+    >
+
+    <meta
+        name="mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="default"
+    >
+
+    <meta
+        name="apple-mobile-web-app-title"
+        content="Rere Note"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="logo.jpg"
+    >
+
+
+    <!-- =========================
+         FONT AWESOME
+    ========================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- =========================
+         CSS
+    ========================== -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         SIDEBAR
+    =================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-top">
+
+
+            <!-- BRAND -->
+
+            <div class="brand">
+
+                <img
+                    src="logo.jpg"
+                    alt="Logo Rere Note"
+                    class="app-logo"
+                >
+
+                <div class="brand-text">
+
+                    <h1>
+                        Rere Note
+                    </h1>
+
+                    <p>
+                        Catatanmu, tetap rapi.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- KEMBALI -->
+
+            <button
+                class="sidebar-close"
+                id="sidebarClose"
+                type="button"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                <span>
+                    Kembali
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <nav class="sidebar-menu">
+
+
+            <!-- SEMUA CATATAN -->
+
+            <button
+                class="menu-item active"
+                id="allNotesBtn"
+                type="button"
+            >
+
+                <span>
+
+                    <i class="fa-regular fa-note-sticky"></i>
+
+                    Semua Catatan
+
+                </span>
+
+                <span
+                    class="menu-count"
+                    id="sidebarNoteCount"
+                >
+                    0
+                </span>
+
+            </button>
+
+
+            <!-- THEME -->
+
+            <button
+                class="menu-item"
+                id="themeBtn"
+                type="button"
+            >
+
+                <span>
+
+                    <i
+                        class="fa-solid fa-moon"
+                        id="themeIcon"
+                    ></i>
+
+                    <span id="themeText">
+                        Mode Gelap
+                    </span>
+
+                </span>
+
+            </button>
+
+        </nav>
+
+
+        <!-- ==================================================
+             CATATAN SAYA
+        =================================================== -->
+
+        <div class="sidebar-bottom">
+
+            <h2>
+                Catatan Saya
+            </h2>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ==================================================
+         SIDEBAR OVERLAY
+    =================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+
+    <!-- ==================================================
+         MAIN
+    =================================================== -->
+
+    <main class="main">
+
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+
+            <div class="header-left">
+
+
+                <!-- HAMBURGER -->
+
+                <button
+                    class="hamburger"
+                    id="mobileMenu"
+                    type="button"
+                    aria-label="Buka menu"
+                >
+
+                    <svg
+                        class="hamburger-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+
+                        <line
+                            x1="4"
+                            y1="9"
+                            x2="20"
+                            y2="9"
+                        ></line>
+
+                        <line
+                            x1="4"
+                            y1="15"
+                            x2="15"
+                            y2="15"
+                        ></line>
+
+                    </svg>
+
+                </button>
+
+
+                <div>
+
+                    <h2>
+                        Semua Catatan
+                    </h2>
+
+                    <p>
+                        Catatanmu, tetap rapi.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CATATAN BARU -->
+
+            <button
+                class="new-note-btn"
+                id="newNoteBtn"
+                type="button"
+            >
+
+                <i class="fa-solid fa-plus"></i>
+
+                <span>
+                    Catatan Baru
+                </span>
+
+            </button>
+
+        </header>
+
+
+
+        <!-- ==================================================
+             SEARCH
+        =================================================== -->
+
+        <section class="tools">
+
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Cari catatan..."
+                    autocomplete="off"
+                >
+
+                <span class="shortcut">
+                    Ctrl K
+                </span>
+
+            </div>
+
+
+            <select id="sortSelect">
+
+                <option value="newest">
+                    Terbaru
+                </option>
+
+                <option value="oldest">
+                    Terlama
+                </option>
+
+                <option value="title">
+                    Judul A-Z
+                </option>
+
+            </select>
+
+        </section>
+
+
+
+        <!-- ==================================================
+             NOTES
+        =================================================== -->
+
+        <section class="notes-container">
+
+
+            <div
+                class="notes-list"
+                id="notesList"
+            ></div>
+
+
+            <!-- EMPTY STATE -->
+
+            <div
+                class="empty-state"
+                id="emptyState"
+            >
+
+                <div class="empty-icon">
+
+                    <i class="fa-regular fa-note-sticky"></i>
+
+                </div>
+
+                <h3 id="emptyTitle">
+                    Belum ada catatan
+                </h3>
+
+                <p id="emptyDescription">
+                    Buat catatan pertamamu untuk mulai menulis.
+                </p>
+
+                <button
+                    class="empty-btn"
+                    id="emptyNewNoteBtn"
+                    type="button"
+                >
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Buat Catatan
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ==================================================
+         EDITOR
+    =================================================== -->
+
+    <div
+        class="modal"
+        id="editorModal"
+    >
+
+        <div class="editor">
+
+
+            <!-- EDITOR HEADER -->
+
+            <header class="editor-header">
+
+
+                <button
+                    class="editor-back"
+                    id="editorBack"
+                    type="button"
+                    aria-label="Kembali"
+                >
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                </button>
+
+
+                <div
+                    class="editor-status"
+                    id="editorStatus"
+                >
+                    Catatan baru
+                </div>
+
+
+                <button
+                    class="save-note-btn-top"
+                    id="saveNoteBtn"
+                    type="button"
+                >
+                    Simpan
+                </button>
+
+            </header>
+
+
+
+            <!-- EDITOR CONTENT -->
+
+            <div class="editor-content">
+
+
+                <!-- JUDUL -->
+
+                <input
+                    type="text"
+                    id="noteTitle"
+                    class="note-title"
+                    placeholder="Judul"
+                    maxlength="150"
+                >
+
+
+                <!-- TOOLBAR -->
+
+                <div class="editor-toolbar">
+
+
+                    <div class="toolbar-group">
+
+
+                        <button
+                            type="button"
+                            class="tool-btn"
+                            data-command="undo"
+                            title="Urungkan"
+                        >
+
+                            <i class="fa-solid fa-rotate-left"></i>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="tool-btn"
+                            data-command="redo"
+                            title="Ulangi"
+                        >
+
+                            <i class="fa-solid fa-rotate-right"></i>
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="toolbar-divider"></div>
+
+
+                    <div class="toolbar-group">
+
+
+                        <button
+                            type="button"
+                            class="tool-btn"
+                            data-command="bold"
+                            title="Tebal"
+                        >
+
+                            <i class="fa-solid fa-bold"></i>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="tool-btn"
+                            data-command="italic"
+                            title="Miring"
+                        >
+
+                            <i class="fa-solid fa-italic"></i>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="tool-btn"
+                            data-command="underline"
+                            title="Garis bawah"
+                        >
+
+                            <i class="fa-solid fa-underline"></i>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="tool-btn"
+                            id="checklistBtn"
+                            title="Checklist"
+                        >
+
+                            <i class="fa-solid fa-list-check"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ISI CATATAN -->
+
+                <div
+                    id="noteContent"
+                    class="note-content"
+                    contenteditable="true"
+                    data-placeholder="Mulai menulis..."
+                    spellcheck="true"
+                ></div>
+
+
+
+                <!-- WARNA -->
+
+                <div class="color-section">
+
+                    <span>
+                        Warna catatan
+                    </span>
+
+                    <div class="color-options">
+
+
+                        <button
+                            class="color-option active"
+                            data-color="default"
+                            style="--color:#ffffff"
+                            title="Default"
+                            type="button"
+                        ></button>
+
+
+                        <button
+                            class="color-option"
+                            data-color="yellow"
+                            style="--color:#fff3b0"
+                            title="Kuning"
+                            type="button"
+                        ></button>
+
+
+                        <button
+                            class="color-option"
+                            data-color="blue"
+                            style="--color:#cfe8ff"
+                            title="Biru"
+                            type="button"
+                        ></button>
+
+
+                        <button
+                            class="color-option"
+                            data-color="green"
+                            style="--color:#d5f5df"
+                            title="Hijau"
+                            type="button"
+                        ></button>
+
+
+                        <button
+                            class="color-option"
+                            data-color="pink"
+                            style="--color:#ffd6e7"
+                            title="Pink"
+                            type="button"
+                        ></button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACTIONS -->
+
+                <div class="editor-actions">
+
+
+                    <button
+                        class="delete-note-btn"
+                        id="deleteNoteBtn"
+                        type="button"
+                    >
+
+                        <i class="fa-regular fa-trash-can"></i>
+
+                        Hapus
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         DELETE CONFIRMATION
+    =================================================== -->
+
+    <div
+        class="confirm-overlay"
+        id="confirmOverlay"
+    >
+
+        <div class="confirm-box">
+
+
+            <div class="confirm-icon">
+
+                <i class="fa-solid fa-trash"></i>
+
+            </div>
+
+
+            <h3>
+                Hapus catatan?
+            </h3>
+
+
+            <p>
+                Catatan ini akan dihapus secara permanen.
+            </p>
+
+
+            <div class="confirm-actions">
+
+
+                <button
+                    class="cancel-btn"
+                    id="cancelDeleteBtn"
+                    type="button"
+                >
+                    Batal
+                </button>
+
+
+                <button
+                    class="confirm-delete-btn"
+                    id="confirmDeleteBtn"
+                    type="button"
+                >
+                    Hapus
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- PIN TOOLTIP -->
+
+    <div
+        class="pin-tooltip"
+        id="pinTooltip"
+    >
+        Sematkan catatan
+    </div>
+
+
+
+    <!-- TOAST -->
+
+    <div
+        class="toast"
+        id="toast"
+    >
+
+        <i class="fa-solid fa-check"></i>
+
+        <span id="toastMessage">
+            Berhasil
+        </span>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         JAVASCRIPT
+    =================================================== -->
+
+    <script src="script.js"></script>
+
+
+
+    <!-- ==================================================
+         SERVICE WORKER
+    =================================================== -->
+
+    <script>
+
+        if ("serviceWorker" in navigator) {
+
+            window.addEventListener(
+                "load",
+                function () {
+
+                    navigator.serviceWorker
+                        .register("./sw.js")
+                        .then(function (registration) {
+
+                            console.log(
+                                "Rere Note PWA aktif:",
+                                registration.scope
+                            );
+
+                        })
+                        .catch(function (error) {
+
+                            console.error(
+                                "Service Worker gagal:",
+                                error
+                            );
+
+                        });
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
